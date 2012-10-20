@@ -11,6 +11,7 @@
 // http://www.mobisoftinfotech.com/blog/iphone/introduction-to-table-view/
 
 #import "ViewController.h"
+#import "PopularPictureCell.h"
 
 @interface ViewController ()
 
@@ -52,14 +53,14 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *tableIdentifier = @"TableIdentifier";
+    static NSString *tableIdentifier = @"PopularPictureCellIdentifier";
     // Reuse cells
-    UITableViewCell *cell = [tableView
+    PopularPictureCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:tableIdentifier];
     
     // No cell to reuse, allocate new cell
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault
+        cell = [[PopularPictureCell alloc]initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:tableIdentifier];
     }
     
@@ -68,10 +69,21 @@
     // For now just use username
     // Need to set image here
     // Need to decide how to store images? or just load all? or cache some
-    cell.textLabel.text = [[[listData objectAtIndex:row] objectForKey:@"user"] objectForKey:@"username"];
+    
+    // Set user name
+    cell.userName.text = [[[listData objectAtIndex:row] objectForKey:@"user"] objectForKey:@"username"];
+    
+    // Grab profile image
+    NSURL *imageUrl = [NSURL URLWithString:[[[self.listData objectAtIndex:row] objectForKey:@"user"] objectForKey:@"profile_picture"]];
+    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
+    cell.profileImage.image = [UIImage imageWithData:imageData];
+    
+    // Grab popular image
+    imageUrl = [NSURL URLWithString:[[[[self.listData objectAtIndex:row] objectForKey:@"images"] objectForKey:@"standard_resolution"] objectForKey:@"url"]];
+    imageData = [NSData dataWithContentsOfURL:imageUrl];
+    cell.popularImage.image = [UIImage imageWithData:imageData];
     
     return cell;
-    
 }
 
 #pragma mark -
@@ -101,6 +113,7 @@
     // maybe take this out and just use responsedata directly?
     self.listData = data;
     [self.myTableView reloadData];
+    NSLog(@"data finished loading");
 }
 
 - (void)didReceiveMemoryWarning

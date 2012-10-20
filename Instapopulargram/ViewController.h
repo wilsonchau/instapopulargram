@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-<UITableViewDelegate, UITableViewDelegate> {
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDelegate> {
     NSMutableData *responseData;
     NSArray *listData;
     IBOutlet UITableView *myTableView;
 }
+
 @property(nonatomic, retain) NSArray *listData;
 @property(nonatomic, retain) NSMutableData *responseData;
 @property(nonatomic, retain) IBOutlet UITableView *myTableView;
+
 @end

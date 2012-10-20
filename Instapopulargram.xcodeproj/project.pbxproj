@@ -23,6 +23,8 @@
 		F2683EC516311309003CBEBB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2683EA016311308003CBEBB /* Foundation.framework */; };
 		F2683ECD16311309003CBEBB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2683ECB16311309003CBEBB /* InfoPlist.strings */; };
 		F2683ED016311309003CBEBB /* InstapopulargramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2683ECF16311309003CBEBB /* InstapopulargramTests.m */; };
+		F2683EDC1632719F003CBEBB /* PopularPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2683EDB1632719F003CBEBB /* PopularPictureCell.m */; };
+		F2683EDD1632719F003CBEBB /* PopularPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2683EDB1632719F003CBEBB /* PopularPictureCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		F2683ECC16311309003CBEBB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F2683ECE16311309003CBEBB /* InstapopulargramTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstapopulargramTests.h; sourceTree = "<group>"; };
 		F2683ECF16311309003CBEBB /* InstapopulargramTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstapopulargramTests.m; sourceTree = "<group>"; };
+		F2683EDA1632719F003CBEBB /* PopularPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopularPictureCell.h; sourceTree = "<group>"; };
+		F2683EDB1632719F003CBEBB /* PopularPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopularPictureCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 				F2683EB916311308003CBEBB /* ViewController.h */,
 				F2683EBA16311308003CBEBB /* ViewController.m */,
 				F2683EA516311308003CBEBB /* Supporting Files */,
+				F2683EDA1632719F003CBEBB /* PopularPictureCell.h */,
+				F2683EDB1632719F003CBEBB /* PopularPictureCell.m */,
 			);
 			path = Instapopulargram;
 			sourceTree = "<group>";
@@ -273,6 +279,7 @@
 				F2683EAB16311308003CBEBB /* main.m in Sources */,
 				F2683EAF16311308003CBEBB /* AppDelegate.m in Sources */,
 				F2683EBB16311308003CBEBB /* ViewController.m in Sources */,
+				F2683EDC1632719F003CBEBB /* PopularPictureCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2683ED016311309003CBEBB /* InstapopulargramTests.m in Sources */,
+				F2683EDD1632719F003CBEBB /* PopularPictureCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
