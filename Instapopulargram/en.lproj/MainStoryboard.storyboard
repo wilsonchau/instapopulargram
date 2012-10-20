@@ -15,7 +15,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="436" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3bA-jg-4we">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PopularPictureCellIdentifier" rowHeight="436" id="pn4-Bx-lQc" customClass="PopularPictureCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PopularPictureCellIdentifier" rowHeight="436" id="pn4-Bx-lQc" customClass="PopularPictureCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="436"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -29,8 +29,8 @@
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYb-uU-SF2">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="88" id="DUB-Wc-bqp"/>
-                                                        <constraint firstAttribute="height" constant="88" id="zc7-GJ-2pd"/>
+                                                        <constraint firstAttribute="height" constant="100" id="e5G-jQ-ayc"/>
+                                                        <constraint firstAttribute="width" constant="100" id="hSv-56-UGf"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfc-9g-vQD">
@@ -47,12 +47,12 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="SzU-bY-JkO" firstAttribute="leading" secondItem="pn4-Bx-lQc" secondAttribute="leading" type="default" id="6Ta-O4-ojp"/>
-                                            <constraint firstItem="SYb-uU-SF2" firstAttribute="leading" secondItem="pn4-Bx-lQc" secondAttribute="leading" constant="15" id="OtR-SQ-wnV"/>
+                                            <constraint firstItem="SYb-uU-SF2" firstAttribute="leading" secondItem="pn4-Bx-lQc" secondAttribute="leading" constant="9" id="Cep-RK-H3d"/>
+                                            <constraint firstItem="SzU-bY-JkO" firstAttribute="top" secondItem="pn4-Bx-lQc" secondAttribute="top" constant="109" id="WMB-TW-Fik"/>
                                             <constraint firstItem="SYb-uU-SF2" firstAttribute="top" secondItem="pn4-Bx-lQc" secondAttribute="top" constant="5" id="X2j-OS-JxC"/>
+                                            <constraint firstItem="tfc-9g-vQD" firstAttribute="top" secondItem="pn4-Bx-lQc" secondAttribute="top" constant="6" id="hwd-lI-ZnZ"/>
                                             <constraint firstItem="tfc-9g-vQD" firstAttribute="leading" secondItem="pn4-Bx-lQc" secondAttribute="leading" constant="128" id="iMh-Qo-dM3"/>
                                             <constraint firstItem="SzU-bY-JkO" firstAttribute="trailing" secondItem="pn4-Bx-lQc" secondAttribute="trailing" type="default" id="knc-N6-gya"/>
-                                            <constraint firstAttribute="bottom" secondItem="SzU-bY-JkO" secondAttribute="bottom" constant="20" type="default" id="pHt-J6-tE8"/>
-                                            <constraint firstItem="tfc-9g-vQD" firstAttribute="top" secondItem="pn4-Bx-lQc" secondAttribute="top" constant="23" id="yTS-Ec-k5e"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="popularImage" destination="SzU-bY-JkO" id="BE9-Tl-qMU"/>

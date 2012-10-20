@@ -21,6 +21,8 @@
 @synthesize listData;
 @synthesize responseData;
 @synthesize myTableView;
+@synthesize popularPictures;
+@synthesize profilePictures;
 
 - (void)viewDidLoad
 {
@@ -29,6 +31,8 @@
     // Make api call to instagram and store results
     
     NSLog(@"viewdidload");
+    self.popularPictures = [[NSCache alloc] init];
+    self.profilePictures = [[NSCache alloc] init];
     NSURLRequest *request = [NSURLRequest requestWithURL:
                              [NSURL URLWithString:@"https://api.instagram.com/v1/media/popular?client_id=50c0e12b64a84dd0b9bbf334ba7f6bf6"]];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -39,6 +43,8 @@
         // failed
     }
 }
+
+// Need to create function to resize images to improve scrolling performance
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
@@ -73,15 +79,30 @@
     // Set user name
     cell.userName.text = [[[listData objectAtIndex:row] objectForKey:@"user"] objectForKey:@"username"];
     
+    NSData *imageData;
+    
     // Grab profile image
     NSURL *imageUrl = [NSURL URLWithString:[[[self.listData objectAtIndex:row] objectForKey:@"user"] objectForKey:@"profile_picture"]];
-    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
-    cell.profileImage.image = [UIImage imageWithData:imageData];
+    UIImage *profileImage = [self.popularPictures objectForKey:imageUrl];
+    if (profileImage == nil) {
+        // Image not in cache yet so dl it!
+        imageData = [NSData dataWithContentsOfURL:imageUrl];
+        profileImage = [UIImage imageWithData:imageData scale:8.0];
+        [self.profilePictures setObject:profileImage forKey:imageUrl];
+    }
+    cell.profileImage.image = profileImage;
     
     // Grab popular image
     imageUrl = [NSURL URLWithString:[[[[self.listData objectAtIndex:row] objectForKey:@"images"] objectForKey:@"standard_resolution"] objectForKey:@"url"]];
-    imageData = [NSData dataWithContentsOfURL:imageUrl];
-    cell.popularImage.image = [UIImage imageWithData:imageData];
+    UIImage *popularImage = [self.popularPictures objectForKey:imageUrl];
+    if (popularImage == nil) {
+        // Image not in cache yet so dl it!
+        imageData = [NSData dataWithContentsOfURL:imageUrl];
+        popularImage = [UIImage imageWithData:imageData scale:8.0];
+        [self.profilePictures setObject:popularImage forKey:imageUrl];
+    }
+    
+    cell.popularImage.image = popularImage;
     
     return cell;
 }
