@@ -10,15 +10,14 @@
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDelegate> {
     NSMutableData *responseData;
-    NSArray *listData;
+    NSArray *pictureData;
     IBOutlet UITableView *myTableView;
-    NSCache *popularPictures;
-    NSCache *profilePictures;
+    NSMutableDictionary *allPictures;
 }
 
-@property(nonatomic, retain) NSArray *listData;
+@property(nonatomic, retain) NSArray *pictureData;
 @property(nonatomic, retain) NSMutableData *responseData;
 @property(nonatomic, retain) IBOutlet UITableView *myTableView;
-@property(nonatomic, retain) NSCache *popularPictures;
-@property(nonatomic, retain) NSCache *profilePictures;
+@property(nonatomic, retain) NSMutableDictionary *allPictures;
+
 @end
