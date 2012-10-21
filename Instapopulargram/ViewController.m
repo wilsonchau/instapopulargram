@@ -23,7 +23,6 @@
 @synthesize pictureData;
 @synthesize responseData;
 @synthesize myTableView;
-@synthesize allPictures;
 
 - (void)viewDidLoad
 {
@@ -33,8 +32,6 @@
     
     // Grab JSON popular image data
     self.pictureData = [self grabPopularImageMetaData];
-    self.allPictures = [NSMutableDictionary dictionary];
-    
 }
 
 - (NSArray*) grabPopularImageMetaData {
@@ -82,17 +79,15 @@
     
     // Grab profile image
     NSURL *imageUrl = [NSURL URLWithString:[[[self.pictureData objectAtIndex:row] objectForKey:@"user"] objectForKey:@"profile_picture"]];
-    UIImage *profileImage = [self.allPictures objectForKey:imageUrl];
-    if (profileImage == nil) {
+//    if (profileImage == nil) {
         [cell.profileImage setImageWithURL:imageUrl];
-    }
+//    }
     
     // Grab popular image
     imageUrl = [NSURL URLWithString:[[[[self.pictureData objectAtIndex:row] objectForKey:@"images"] objectForKey:@"standard_resolution"] objectForKey:@"url"]];
-    UIImage *popularImage = [self.allPictures objectForKey:imageUrl];
-    if (popularImage == nil) {
+//    if (popularImage == nil) {
         [cell.popularImage setImageWithURL:imageUrl];
-    }
+//    }
     
     return cell;
 }

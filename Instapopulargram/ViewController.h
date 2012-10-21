@@ -12,12 +12,10 @@
     NSMutableData *responseData;
     NSArray *pictureData;
     IBOutlet UITableView *myTableView;
-    NSMutableDictionary *allPictures;
 }
 
 @property(nonatomic, retain) NSArray *pictureData;
 @property(nonatomic, retain) NSMutableData *responseData;
 @property(nonatomic, retain) IBOutlet UITableView *myTableView;
-@property(nonatomic, retain) NSMutableDictionary *allPictures;
 
 @end
