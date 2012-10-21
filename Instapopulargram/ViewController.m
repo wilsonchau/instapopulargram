@@ -8,9 +8,12 @@
 
 // Used these tutorials
 // http://agilewarrior.wordpress.com/2012/02/01/how-to-make-http-request-from-iphone-and-parse-json-result/
+// Used https://github.com/rs/SDWebImage for asynchronous calls to get images, also caches them for us
 
 #import "ViewController.h"
 #import "PopularPictureCell.h"
+
+#import "UIImageView+WebCache.h"
 
 @interface ViewController ()
 
@@ -28,10 +31,8 @@
     
     NSLog(@"viewdidload");
     
-    // Move all this to init function??? so we dont have to call reload data
     // Grab JSON popular image data
     self.pictureData = [self grabPopularImageMetaData];
-    [self.myTableView reloadData];
     self.allPictures = [NSMutableDictionary dictionary];
     
 }
@@ -43,12 +44,9 @@
     // extract data
     NSArray *data = [res objectForKey:@"data"];
     
-    // set listdata to data
-    // maybe take this out and just use responsedata directly?
+    // return json as array
     return data;
 }
-
-// Need to create function to resize images to improve scrolling performance
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
@@ -79,68 +77,24 @@
     // Set user name
     cell.userName.text = [[[pictureData objectAtIndex:row] objectForKey:@"user"] objectForKey:@"username"];
     
-    NSData *imageData;
+    // No need to cache images because sdwebimage takes care of that
+    // sdwebimages also makes asynchronous request for images
     
     // Grab profile image
     NSURL *imageUrl = [NSURL URLWithString:[[[self.pictureData objectAtIndex:row] objectForKey:@"user"] objectForKey:@"profile_picture"]];
     UIImage *profileImage = [self.allPictures objectForKey:imageUrl];
     if (profileImage == nil) {
-        // Image not in cache yet so dl it!
-        imageData = [NSData dataWithContentsOfURL:imageUrl];
-        profileImage = [UIImage imageWithData:imageData];
-        [self.allPictures setObject:profileImage forKey:imageUrl];
+        [cell.profileImage setImageWithURL:imageUrl];
     }
-    cell.profileImage.image = profileImage;
     
     // Grab popular image
     imageUrl = [NSURL URLWithString:[[[[self.pictureData objectAtIndex:row] objectForKey:@"images"] objectForKey:@"standard_resolution"] objectForKey:@"url"]];
     UIImage *popularImage = [self.allPictures objectForKey:imageUrl];
     if (popularImage == nil) {
-        // Image not in cache yet so dl it!
-        imageData = [NSData dataWithContentsOfURL:imageUrl];
-        popularImage = [UIImage imageWithData:imageData];
-        [self.allPictures setObject:popularImage forKey:imageUrl];
+        [cell.popularImage setImageWithURL:imageUrl];
     }
-    cell.popularImage.image = popularImage;
     
     return cell;
-}
-
-#pragma mark -
-#pragma mark NSURLConnection Methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"Connection failed: %@", [error localizedDescription]);
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    NSLog(@"data finished loading");
-}
-
-#pragma mark -
-#pragma mark Deferred image loading (UIScrollViewDelegate)
-
-// Load images for all onscreen rows when scrolling is finished
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if (!decelerate)
-	{
-//        [self loadImagesForOnscreenRows];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-//    [self loadImagesForOnscreenRows];
 }
 
 - (void)didReceiveMemoryWarning
